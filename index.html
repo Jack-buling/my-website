@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jack 罗 的个人网页</title>
+    <style>
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('background.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #333;
+            line-height: 1.6;
+            position: relative;
+        }
+        body::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+        }
+        header {
+            color: #333;
+            text-align: center;
+            padding: 2em 0;
+        }
+        header h1 {
+            margin: 0;
+            font-size: 3em;
+            font-weight: 300;
+        }
+        .container {
+            width: 80%;
+            margin: 2em auto;
+            overflow: hidden;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .section {
+            margin: 20px 0;
+        }
+        h2 {
+            color: #4CAF50;
+            font-weight: 400;
+        }
+        .content, .editable {
+            border: 1px dashed #ccc;
+            padding: 10px;
+            min-height: 20px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            background: #f9f9f9;
+        }
+        .content img, .content video {
+            max-width: 100%;
+            display: block;
+            margin: 10px 0;
+        }
+        .content input[type="file"] {
+            display: block;
+            margin: 10px 0;
+        }
+        .add-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .add-btn button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        .add-btn button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 1em 0;
+            position: relative;
+            width: 100%;
+        }
+        #edit-buttons {
+            text-align: center;
+            margin-top: 20px;
+        }
+        #edit-buttons button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        #edit-buttons button:hover {
+            background-color: #45a049;
+        }
+        #login {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+        }
+        #login input {
+            padding: 10px;
+            margin: 10px;
+            font-size: 1em;
+        }
+        #login button {
+            padding: 10px 20px;
+            font-size: 1em;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            border-radius: 5px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s;
+        }
+        #login button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div id="login">
+        <input type="password" id="password" placeholder="输入密码">
+        <button onclick="checkPassword()">登录</button>
+    </div>
+    <header>
+        <h1>Jack 罗 的个人网页</h1>
+    </header>
+    <div class="container">
+        <section class="section" id="personal-introduction">
+            <h2>个人介绍</h2>
+            <div class="content editable" contenteditable="true">
+                这里是你的个人简介。你可以在这里介绍自己，包括你的兴趣爱好、工作背景和个人成就。
+                <input type="file" accept="image/*,video/*" onchange="previewFile(this)">
+            </div>
+            <div class="add-btn">
+                <button onclick="addContent('personal-introduction')">添加更多介绍</button>
+            </div>
+        </section>
+        <section class="section" id="daily-records">
+            <h2>生活记录</h2>
+            <div class="content editable" contenteditable="true">
+                <p><strong>日期：</strong>2024-05-27</p>
+                <p><strong>活动：</strong>今天完成了个人网页的设计和编码。</p>
+                <input type="file" accept="image/*,video/*" onchange="previewFile(this)">
+            </div>
+            <div class="add-btn">
+                <button onclick="addContent('daily-records')">添加更多记录</button>
+            </div>
+        </section>
+        <section class="section" id="book-notes">
+            <h2>读书笔记</h2>
+            <div class="content editable" contenteditable="true">
+                <p><strong>书名：</strong>《网页设计入门》</p>
+                <p><strong>笔记：</strong>了解了HTML和CSS的基础知识，以及如何创建一个简单的网页。</p>
+                <input type="file" accept="image/*,video/*" onchange="previewFile(this)">
+            </div>
+            <div class="add-btn">
+                <button onclick="addContent('book-notes')">添加更多笔记</button>
+            </div>
+        </section>
+    </div>
+    <div id="edit-buttons">
+        <button onclick="saveContent()">保存内容</button>
+        <button onclick="loadContent()">加载内容</button>
+    </div>
+    <footer>
+        <p>版权所有 &copy; 2024</p>
+    </footer>
+    <script>
+        const correctPassword = '20031219Luo'; // 你设置的密码
+
+        function checkPassword() {
+            const passwordInput = document.getElementById('password').value;
+            if (passwordInput === correctPassword) {
+                document.getElementById('login').style.display = 'none';
+                enableEditing();
+            } else {
+                alert('密码错误');
+            }
+        }
+
+        function enableEditing() {
+            const editables = document.querySelectorAll('.editable');
+            editables.forEach(editable => {
+                editable.setAttribute('contenteditable', 'true');
+            });
+            const editButtons = document.getElementById('edit-buttons');
+            editButtons.style.display = 'block';
+        }
+
+        function saveContent() {
+            const editableElements = document.querySelectorAll('.content');
+            let content = [];
+            editableElements.forEach((element, index) => {
+                content.push({
+                    index: index,
+                    html: element.innerHTML
+                });
+            });
+            localStorage.setItem('content', JSON.stringify(content));
+            alert('内容已保存');
+        }
+
+        function loadContent() {
+            const savedContent = localStorage.getItem('content');
+            if (savedContent) {
+                const content = JSON.parse(savedContent);
+                content.forEach(item => {
+                    document.querySelectorAll('.content')[item.index].innerHTML = item.html;
+                });
+                alert('内容已加载');
+            } else {
+                alert('没有保存的内容');
+            }
+        }
+
+        function addContent(sectionId) {
+            const section = document.getElementById(sectionId);
+            const newContent = document.createElement('div');
+            newContent.className = 'content editable';
+            newContent.contentEditable = 'true';
+            newContent.innerHTML = '<input type="file" accept="image/*,video/*" onchange="previewFile(this)">';
+            section.insertBefore(newContent, section.querySelector('.add-btn'));
+        }
+
+        function previewFile(input) {
+            const file = input.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                let preview;
+                if (file.type.startsWith('image/')) {
+                    preview = document.createElement('img');
+                    preview.src = e.target.result;
+                } else if (file.type.startsWith('video/')) {
+                    preview = document.createElement('video');
+                    preview.src = e.target.result;
+                    preview.controls = true;
+                }
+                input.parentNode.insertBefore(preview, input);
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        }
+    </script>
+</body>
+</html>
